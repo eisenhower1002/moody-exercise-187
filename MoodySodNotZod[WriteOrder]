@@ -1,0 +1,78 @@
+//AUTHOR: KEVIN MOODY
+//CLASS: CPT 187
+//PURPOSE: TRANSMITS THE COMPLETED CUSTOMER ORDERS TO A PREDETERMINED FILE FOR LATER RETRIEVAL
+//DATE CREATED: 4/21/21
+package edu.cpt187.moody.exercise6;
+
+//import the print writer
+import java.io.PrintWriter;
+//import the file writer
+import java.io.FileWriter;
+//import IOException
+import java.io.IOException;
+//begin supportive class WriteOrder
+public class WriteOrder 
+{
+	//VARIABLES
+	private boolean fileFoundFlag = false;
+	private String masterFileName = "";
+	private int recordCount = 0;
+
+	//CONSTRUCTOR
+	//begin non-default constructor
+	WriteOrder(String borrowedFileName)
+	{
+		masterFileName = borrowedFileName;
+	}//END OF non-default constructor
+
+
+	//SETTERS
+
+
+	//begin setWriteOrder
+	public void setWriteOrder(int borrowedItemID, String borrowedItemName, double borrowedItemPrice, int borrowedQuantity, double borrowedOrderCost)
+	{
+		try
+		{
+			//initialize the print writer
+			PrintWriter filePW = new PrintWriter(new FileWriter(masterFileName, true));
+			//print the data to the file
+			filePW.printf("%n%d\t%s\t%f\t%d\t%f\t", borrowedItemID, borrowedItemName, borrowedItemPrice, borrowedQuantity, borrowedOrderCost);
+			//set fileFoundFlag to true
+			fileFoundFlag = true;
+			//increment the recordCount
+			recordCount++;
+			//close the Print Writer
+			filePW.close();
+		}//END OF try
+		catch (IOException ex)
+		{
+			fileFoundFlag = false;
+		}//END OF catch
+
+	}//END OF setWriteOrder
+
+
+	//GETTERS
+
+
+	//begin getFileFoundFlag
+	public boolean getFileFoundFlag()
+	{
+		return fileFoundFlag;
+	}//END OF getFileFoundFlag
+
+	//begin getFileName
+	public String getFileName()
+	{
+		return masterFileName;
+	}//END OF getFileName
+
+	//begin getRecordCount
+	public int getRecordCount()
+	{
+		return recordCount;
+	}//END OF getRecordCount
+
+}//END OF supportive class WriteOrder
+
